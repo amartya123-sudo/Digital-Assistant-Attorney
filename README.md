@@ -46,11 +46,6 @@ To get started with the Digital Assistant Attorney project, follow these steps:
     conda activate environment_name
     ```
 
-4. **Run the Application**
-   ```bash
-   python app.py
-   ```
-
 ## Usage
 
 To use the system for answering legal questions:
