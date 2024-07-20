@@ -1,0 +1,5 @@
+openai==1.35.13
+langchain==0.1.16
+llama-index==0.10.30
+streamlit==1.33.0
+kor==1.0.2
