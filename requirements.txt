@@ -4,3 +4,4 @@ llama-index==0.10.30
 streamlit==1.33.0
 kor==1.0.2
 torch
+transfomers

@@ -15,6 +15,8 @@ from kor import JSONEncoder
 from llama_index.core import load_index_from_storage, StorageContext
 from llama_index.core.query_engine import CitationQueryEngine
 
+from engine.main import LegalCaseSearchApp
+
 
 st.set_page_config(page_title="Digital Assistant Attorney",layout="wide")
 
@@ -30,7 +32,22 @@ st.header("Digital Assistant Attorney")
 tab1, tab2, tab3, tab4 = st.tabs(["Legal Search Engine", "Legal-QA using DPR(Dense Passage Retriever)", "Multi-Document QA using RAG(Retrieval-Augmented Generation)", "AutoGPT"])
 
 with tab1:
-    pass
+    st.title("Legal Case Search")
+
+    app = LegalCaseSearchApp()
+
+    query = st.text_input("Search")
+
+    if st.button("Search"):
+        results = app.combined_search(query)
+        if results:
+            case_details = app.get_case_details(results)
+            for case in case_details:
+                st.subheader(case['title'])
+                st.write(f"Court Name: {case['court_name']}")
+                st.write(case['content'])
+        else:
+            st.write("No matching cases found.")
 
 with tab2:
     st.header("Legal-QA using DPR(Dense Passage Retriever)")
