@@ -310,11 +310,3 @@ if start:
             for n, i in enumerate(database_answers):
                 formatting += '* ' + questions_d[n] + '\n' + i + '\n'
             st.markdown(formatting)
-            
-           
-
-
-        
-            
-        
-
