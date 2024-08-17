@@ -13,13 +13,9 @@ class LegalCaseSearchApp:
             use_ssl=True,
             verify_certs=True,
         )
-        self.index_name = 'court_cases'
-        self.storage_dir = './storage'
-        self.data_file = 'data_MV.json'
-
-        self.vector_store = FaissVectorStore.from_persist_dir(self.storage_dir)
+        self.vector_store = FaissVectorStore.from_persist_dir('./storage')
         self.storage_context = StorageContext.from_defaults(
-            vector_store=self.vector_store, persist_dir=self.storage_dir)
+            vector_store=self.vector_store, persist_dir='./storage')
         self.index = load_index_from_storage(storage_context=self.storage_context)
         self.query_engine = self.index.as_query_engine(similarity_top_k=5)
         
@@ -27,13 +23,13 @@ class LegalCaseSearchApp:
         self._index_documents()
 
     def _create_index(self):
-        self.client.indices.create(index=self.index_name, ignore=400)
+        self.client.indices.create(index='court_cases', ignore=400)
 
     def _index_documents(self):
-        with open(self.data_file, 'r') as f:
+        with open('data_MV.json', 'r') as f:
             data = json.load(f)
         for i, doc in enumerate(data):
-            self.client.index(index=self.index_name, id=i, body=doc)
+            self.client.index(index='court_cases', id=i, body=doc)
 
     def keyword_search(self, query):
         body = {
@@ -44,7 +40,7 @@ class LegalCaseSearchApp:
                 }
             }
         }
-        return self.client.search(index=self.index_name, body=body)
+        return self.client.search(index='court_cases', body=body)
 
     def semantic_search(self, query):
         return self.query_engine.query(query)
@@ -59,7 +55,7 @@ class LegalCaseSearchApp:
         return [title for title in keyword_titles if title in semantic_titles]
 
     def get_case_details(self, titles):
-        with open(self.data_file, 'r') as db:
+        with open('data_MV.json', 'r') as db:
             data = json.load(db)
         case_details = []
         for case in data:
