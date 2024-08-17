@@ -10,3 +10,4 @@ llama-index-vector-stores-faiss
 langchain-openai
 langchain-core
 langchain-community
+opensearch-py
