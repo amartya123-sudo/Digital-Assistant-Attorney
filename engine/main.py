@@ -26,7 +26,7 @@ class LegalCaseSearchApp:
         self.client.indices.create(index='court_cases', ignore=400)
 
     def _index_documents(self):
-        with open('./engine/data_MV.json', 'r') as f:
+        with open('./engine/data_MV.json', 'r',encoding='utf-8') as f:
             data = json.load(f)
         for i, doc in enumerate(data):
             self.client.index(index='court_cases', id=i, body=doc)
@@ -55,7 +55,7 @@ class LegalCaseSearchApp:
         return [title for title in keyword_titles if title in semantic_titles]
 
     def get_case_details(self, titles):
-        with open('./engine/data_MV.json', 'r') as db:
+        with open('./engine/data_MV.json', 'r', encoding='utf-8') as db:
             data = json.load(db)
         case_details = []
         for case in data:
