@@ -6,3 +6,4 @@ kor==1.0.2
 torch
 transformers
 faiss-cpu
+llama-index-vector-stores-faiss
