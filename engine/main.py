@@ -13,9 +13,9 @@ class LegalCaseSearchApp:
             use_ssl=True,
             verify_certs=True,
         )
-        self.vector_store = FaissVectorStore.from_persist_dir('./storage')
+        self.vector_store = FaissVectorStore.from_persist_dir('storage')
         self.storage_context = StorageContext.from_defaults(
-            vector_store=self.vector_store, persist_dir='./storage')
+            vector_store=self.vector_store, persist_dir='storage')
         self.index = load_index_from_storage(storage_context=self.storage_context)
         self.query_engine = self.index.as_query_engine(similarity_top_k=5)
         
