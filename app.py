@@ -125,7 +125,7 @@ with tab3:
 with tab4:
     @st.cache_resource
     def preprocess_prelimnary():
-        storage_context = StorageContext.from_defaults(persist_dir = './sutogpt/persist')
+        storage_context = StorageContext.from_defaults(persist_dir = './autogpt/persist')
         index = load_index_from_storage(storage_context = storage_context)
         query_engine = CitationQueryEngine.from_args(index, similarity_top_k = 1, citation_chunk_size = 512)
 
