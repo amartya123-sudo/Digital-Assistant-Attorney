@@ -5,3 +5,4 @@ streamlit==1.33.0
 kor==1.0.2
 torch
 transformers
+faiss-cpu
