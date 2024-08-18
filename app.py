@@ -39,15 +39,16 @@ with tab1:
     query = st.text_input("Search")
 
     if st.button("Search"):
-        results = app.combined_search(query)
-        if results:
-            case_details = app.get_case_details(results)
-            for case in case_details:
-                st.subheader(case['title'])
-                st.write(f"Court Name: {case['court_name']}")
-                st.write(case['content'])
-        else:
-            st.write("No matching cases found.")
+        with st.spinner("Searching..."):
+            results = app.combined_search(query)
+            if results:
+                case_details = app.get_case_details(results)
+                for case in case_details:
+                    st.subheader(case['title'])
+                    st.write(f"Court Name: {case['court_name']}")
+                    st.write(case['content'])
+            else:
+                st.write("No matching cases found.")
 
 with tab2:
     st.header("Legal-QA using DPR(Dense Passage Retriever)")
